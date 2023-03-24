@@ -1,7 +1,3 @@
-# AREDN
-Contribution to this Project
-
-
 # CheckTFTPService
 Check if the service is working
 
