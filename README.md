@@ -3,7 +3,7 @@ Contribution to this Project
 
 
 # CheckTFTPService
-Check if the service is working
+Check if the service is working on a Mikrotik hp AC router
 
 In collaboration with the : https://github.com/dhamstack/AREDNstack
 
@@ -20,3 +20,6 @@ else If there is no listener,
 The return code of the script
 - 0 : The service works, there is a listener on port 69
 - 1 : There is no listener on port 69
+
+# Cisco Corporate Directory
+Convert the phonebook.xml file intended for a YEAlink for a Cisco
