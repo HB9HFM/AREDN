@@ -1,8 +1,6 @@
 # CheckTFTPService
 Check if the service is working
 
-In collaboration with the : https://github.com/dhamstack/AREDNstack
-
 Scan the port status with netstat
 If there is a listener
  Exit
