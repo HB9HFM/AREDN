@@ -1,7 +1,7 @@
 # AREDN
 Contribution on this Project
 
-# CheckTFTPService
+# TFTPService
 Check if the service is working on a Mikrotik hp AC router
 
 # Cisco Corporate Directory
