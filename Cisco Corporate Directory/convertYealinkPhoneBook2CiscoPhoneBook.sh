@@ -1,4 +1,9 @@
 #!/bin/sh
+# $Author: Daniel HB9HFM $
+# $Date: 2023/03/27 15:55:57 $
+# $Revision: 1.1 $
+# $Source: convertYealinkPhoneBook2CiscoPhoneBook.sh,v $
+# Don't forget to convert the line breaks to Unix mode!
 
 # Le nom du fichier
 SourceFileName=phonebook
