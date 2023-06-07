@@ -19,6 +19,59 @@ function LOGInformation ()
 	fi
 }
 
+function CheckDNSEntry ()
+{
+	LOGInformation "_CheckDNSEntry"
+
+	LOGInformation "/usr/bin/nslookup -timeout=1 ${RemoteHostName} &> /dev/null"
+
+	nslookup -timeout=1 ${RemoteHostName} &> /dev/null
+	case $? in
+		"0")	LOGInformation "No problems occurred"
+                        ;;
+		"1")	LOGInformation "Query Format Error"
+			RemoveTempFile
+			exit 3
+			;;
+		"2")	LOGInformation "Server failed to complete the DNS request"
+			RemoveTempFile
+			exit 3
+			;;
+		"3")	LOGInformation "Domain name does not exist"
+			RemoveTempFile
+			exit 3
+			;;
+		"4")	LOGInformation " Function not implemented"
+			RemoveTempFile
+			exit 3
+			;;
+		"5")	LOGInformation "The server refused to answer for the query"
+			RemoveTempFile
+			exit 3
+			;;
+		"6")	LOGInformation "Name that should not exist, does exist"
+			RemoveTempFile
+			exit 3
+			;;
+		"7")	LOGInformation "Rset that should not exist, does exist"
+			RemoveTempFile
+			exit 3
+			;;
+		"8")	LOGInformation "Server not authoritative for the zone"
+			RemoveTempFile
+			exit 3
+			;;
+		"9")	LOGInformation "Name not in zone"
+			RemoveTempFile
+			exit 3
+			;;
+		*)	LOGInformation "Unexpected option"
+			RemoveTempFile
+			exit 3
+			;;
+	esac
+}
+
 function GetCSVFile ()
 {
 	LOGInformation "_GetCSVFile"
@@ -184,7 +237,8 @@ DomaineName=local.mesh
 CSVFileName="hb9hfm.csv"
 XMLFileName="hb9hfm.xml"
 
-RemoteHostName=hb-aredn-srvt01.${DomaineName}
+#RemoteHostName=hb-aredn-srvt01.${DomaineName}
+RemoteHostName=localhost.${DomaineName}
 RemoteDirectory=phonebook
 RemoteCSVFileName=phonebook.xml
 
@@ -197,7 +251,8 @@ then
 	LOG="/usr/bin/tee -a ${LOGFile}"
 fi
 
-GetCSVFile
+CheckDNSEntry
+#GetCSVFile
 CheckNeededInformation
 ConvertCSVFile2XMLFile
 
