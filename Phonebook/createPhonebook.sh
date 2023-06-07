@@ -7,7 +7,8 @@
 
 function Help()
 {
-	echo "Usage: $1 [ -v | --verbose ]"
+	echo "Usage: $1 [ -p | --phone -i | --ipdialing]"
+	echo "Usage: $1 [ -p | --phone -x | --pbxdialing]"
 	exit 2
 }
 
@@ -19,13 +20,37 @@ function LOGInformation ()
 	fi
 }
 
+function PingRemoteHost ()
+{
+	LOGInformation "_PingRemoteHost"
+	LOGInformation "/bin/ping -c 1 -W 1 ${RemoteHostName} &> /dev/null"
+
+	/bin/ping -c 1 -W 1 ${RemoteHostName} &> /dev/null
+	case $? in
+		"0")	LOGInformation "No problems occurred"
+                        ;;
+		"1")	LOGInformation "No reply"
+			RemoveTempFile
+			exit 3
+			;;
+		"2")	LOGInformation "Other error"
+			RemoveTempFile
+			exit 3
+			;;
+		*)	LOGInformation "Unexpected option"
+			RemoveTempFile
+			exit 3
+			;;
+	esac
+	LOGInformation "_PingRemoteHost Down"
+}
+
 function CheckDNSEntry ()
 {
 	LOGInformation "_CheckDNSEntry"
-
 	LOGInformation "/usr/bin/nslookup -timeout=1 ${RemoteHostName} &> /dev/null"
 
-	nslookup -timeout=1 ${RemoteHostName} &> /dev/null
+	/usr/bin/nslookup -timeout=1 ${RemoteHostName} &> /dev/null
 	case $? in
 		"0")	LOGInformation "No problems occurred"
                         ;;
@@ -70,6 +95,7 @@ function CheckDNSEntry ()
 			exit 3
 			;;
 	esac
+	LOGInformation "_CheckDNSEntry Down"
 }
 
 function GetCSVFile ()
@@ -123,6 +149,7 @@ function GetCSVFile ()
 	else
 		LOGInformation "File is not empty"
 	fi
+	LOGInformation "_GetCSVFile Down"
 }
 
 
@@ -166,6 +193,8 @@ function ConvertCSVFile2XMLFile()
 	done
 
 	echo "</${XMLTitle}>" >> ${XMLFileName}
+
+	LOGInformation "_ConvertCSVFile2XMLFile Down"
 }
 
 function CheckNeededInformation ()
@@ -180,6 +209,7 @@ function CheckNeededInformation ()
 	else
 		LOGInformation "${CSVFileName} was found :-)"
 	fi
+	LOGInformation "_CheckNeededInformation Down"
 }
 
 function RemoveTempFile ()
@@ -204,7 +234,7 @@ DEBUG=false
 DEBUG=true
 
 # Parse command line arguments
-while [[ $# -gt 0 ]]
+while [[ $# -ne 3 ]]
 do
 	case "$1" in
 	-p | --phone )
@@ -220,11 +250,7 @@ do
 		PBXDialing="true"
 		shift
 		;;
-	-h | --help)
-		Help $0
-		;;
-	*)
-		echo "Unexpected option: $1"
+	*)	echo "Unexpected option: $1"
 		Help $0
 		;;
 	esac
@@ -240,6 +266,7 @@ XMLFileName="hb9hfm.xml"
 #RemoteHostName=hb-aredn-srvt01.${DomaineName}
 RemoteHostName=localhost.${DomaineName}
 RemoteDirectory=phonebook
+#RemoteCSVFileName=phonebook.csv
 RemoteCSVFileName=phonebook.xml
 
 
@@ -252,6 +279,7 @@ then
 fi
 
 CheckDNSEntry
+PingRemoteHost
 #GetCSVFile
 CheckNeededInformation
 ConvertCSVFile2XMLFile
