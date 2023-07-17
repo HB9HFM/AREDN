@@ -1,0 +1,6 @@
+Enabled,Call,FirstName,LastName,DisplayName,Street,StreetNumber,PLZ,City,PBXPhoneNumber,IPPhoneNumber
+#,HB9Demo1,FirstName1,LastName1,DisplayName1,Street1,1,PLZ1,City1,112345,012345
+,HB9Demo0,FirstName0,LastName0,DisplayName0,Street0,0,PLZ0,City0,012345,002345
+,HB9Demo2,FirstName2,LastName2,DisplayName2,Street2,2,PLZ2,City2,212345,022345
+,HB9Demo3,FirstName3,LastName3,DisplayName3,Street3,3,PLZ3,City3,,032345
+,HB9Demo4,FirstName4,LastName4,DisplayName4,Street4,3,PLZ4,City4,412345,

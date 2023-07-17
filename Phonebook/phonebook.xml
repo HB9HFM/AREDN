@@ -1,0 +1,16 @@
+<CiscoIPPhoneDirectory>
+	<Title>AREDN Swiss Phone Directory</Title>
+	<Prompt>Select the User</Prompt>
+<DirectoryEntry>
+	<Name>HB9Demo0 FirstName0 LastName0 DisplayName0</Name>
+	<Telephone>002345@002345.local.mesh:5060</Telephone>
+</DirectoryEntry>
+<DirectoryEntry>
+	<Name>HB9Demo2 FirstName2 LastName2 DisplayName2</Name>
+	<Telephone>022345@022345.local.mesh:5060</Telephone>
+</DirectoryEntry>
+<DirectoryEntry>
+	<Name>HB9Demo3 FirstName3 LastName3 DisplayName3</Name>
+	<Telephone>032345@032345.local.mesh:5060</Telephone>
+</DirectoryEntry>
+</CiscoIPPhoneDirectory>

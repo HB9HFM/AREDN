@@ -1,6 +1,6 @@
 #!/bin/sh
 # $Author: Daniel HB9HFM $
-# $Date: 2023/06/08 11:55:57 $
+# $Date: 2023/03/23 11:55:57 $
 # $Revision: 1.1 $
 # $Source: createPhonebook.sh,v $
 # Don't forget to convert the line breaks to Unix mode!
